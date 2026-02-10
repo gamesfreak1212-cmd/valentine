@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For You 💖</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: radial-gradient(circle at top, #1a0026, #000);
+  color: #fff;
+  overflow: hidden;
+}
+
+/* ⭐ stars background */
+.stars {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+}
+.star {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: white;
+  animation: twinkle 2s infinite alternate;
+}
+@keyframes twinkle {
+  from { opacity: .2; }
+  to { opacity: 1; }
+}
+
+/* 📦 card */
+.card {
+  position: absolute;
+  inset: 0;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 25px;
+}
+
+.active { display: flex; }
+
+.box {
+  background: rgba(255,255,255,0.08);
+  padding: 25px;
+  border-radius: 20px;
+  max-width: 420px;
+  backdrop-filter: blur(10px);
+}
+
+h1 { color: #ff7aa2; }
+p { line-height: 1.6; }
+
+button {
+  margin-top: 18px;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 30px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.yes { background: #ff4d6d; color: white; }
+.no { background: white; color: #ff4d6d; }
+
+/* 🧸 teddy */
+.teddy {
+  width: 140px;
+  height: 140px;
+  background: #d98c5f;
+  border-radius: 50%;
+  margin: 0 auto 15px;
+  position: relative;
+}
+.teddy:before, .teddy:after {
+  content: "";
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  background: #d98c5f;
+  border-radius: 50%;
+  top: -15px;
+}
+.teddy:before { left: -10px; }
+.teddy:after { right: -10px; }
+
+.eye {
+  width: 10px;
+  height: 10px;
+  background: black;
+  border-radius: 50%;
+  position: absolute;
+  top: 55px;
+}
+.eye.left { left: 40px; }
+.eye.right { right: 40px; }
+
+.mouth {
+  width: 20px;
+  height: 10px;
+  border-bottom: 3px solid black;
+  border-radius: 50%;
+  position: absolute;
+  bottom: 35px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* typing cursor */
+.cursor {
+  border-right: 2px solid #fff;
+  animation: blink 1s infinite;
+}
+@keyframes blink { 50% { border-color: transparent; } }
+</style>
+</head>
+
+<body>
+
+<div class="stars" id="stars"></div>
+
+<!-- 🎵 music -->
+<audio id="music" loop>
+  <source src="love.mp3" type="audio/mpeg">
+</audio>
+
+<!-- PAGE 1 -->
+<div class="card active" id="page1">
+  <div class="box">
+    <h1>Hi Sichu 💕</h1>
+    <p>
+      I know you’re surprised what this guy is planning 😅<br><br>
+      Ahmm… hehe…<br><br>
+      I have a few questions for you,<br>
+      and you have to answer them by clicking  
+      <b>Yes</b> or <b>No</b> 💖
+    </p>
+    <button class="yes" onclick="nextPage(2)">Next ➜</button>
+  </div>
+</div>
+
+<!-- PAGE 2 -->
+<div class="card" id="page2">
+  <div class="box">
+    <p id="typingText"></p>
+    <button class="yes" onclick="nextPage(3)">Next ➜</button>
+  </div>
+</div>
+
+<!-- PAGE 3 -->
+<div class="card" id="page3">
+  <div class="box">
+    <h1>So… 💭</h1>
+    <p>Will you be my Valentine this year? 💖🌹</p>
+    <button class="yes" onclick="yesAnswer()">Yes 💘</button>
+    <button class="no" onclick="nextPage(4)">No 🙈</button>
+  </div>
+</div>
+
+<!-- PAGE 4 -->
+<div class="card" id="page4">
+  <div class="box">
+    <div class="teddy">
+      <div class="eye left"></div>
+      <div class="eye right"></div>
+      <div class="mouth"></div>
+    </div>
+    <p>Did you really say no…? 🥺</p>
+  </div>
+</div>
+
+<!-- PAGE YES -->
+<div class="card" id="pageYes">
+  <div class="box">
+    <h1>YAYYY 💖</h1>
+    <p>You just made me the happiest person alive 🥰</p>
+  </div>
+</div>
+
+<script>
+/* ⭐ create stars */
+for (let i = 0; i < 80; i++) {
+  const s = document.createElement("div");
+  s.className = "star";
+  s.style.top = Math.random()*100+"%";
+  s.style.left = Math.random()*100+"%";
+  document.getElementById("stars").appendChild(s);
+}
+
+/* 🎵 fade-in music after first tap */
+document.body.addEventListener("click", () => {
+  const m = document.getElementById("music");
+  m.volume = 0;
+  m.play().catch(()=>{});
+  let v = 0;
+  const fade = setInterval(()=>{
+    if(v < 0.6){ v += 0.02; m.volume = v; }
+    else clearInterval(fade);
+  },200);
+}, { once:true });
+
+/* 🔄 page change */
+function nextPage(n){
+  document.querySelectorAll(".card").forEach(c=>c.classList.remove("active"));
+  document.getElementById("page"+n).classList.add("active");
+}
+
+/* 💘 yes */
+function yesAnswer(){
+  document.querySelectorAll(".card").forEach(c=>c.classList.remove("active"));
+  document.getElementById("pageYes").classList.add("active");
+}
+
+/* ⌨️ typing message */
+const message = `
+Hi baby… 💌
+
+We’ve known each other for almost 8 years now,
+and we’ve liked each other for the past 4 years… ❤️
+
+I know I’m not the person you once wished for.
+I’m just someone ordinary… maybe even boring.
+
+But still… I feel something real for you.
+
+And somehow, I feel this Valentine
+might be the last one I ever get to celebrate with you… 💔
+
+Maybe we aren’t meant to stay forever.
+But I truly wish… at least for this Valentine,
+we can still be together. 💖
+`;
+
+let i = 0;
+function type(){
+  if(i < message.length){
+    document.getElementById("typingText").innerHTML =
+      message.slice(0,i++) + "<span class='cursor'></span>";
+    setTimeout(type, 35);
+  }
+}
+type();
+</script>
+
+</body>
+</html>
