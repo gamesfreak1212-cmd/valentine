@@ -2,81 +2,55 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>For You</title>
+<title>For You ❤️</title>
+
 <style>
-*{margin:0;padding:0;box-sizing:border-box;}
-body{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;}
-
-audio#bgMusic{display:none;}
-
-section{display:none;height:100vh;width:100vw;position:relative;overflow:hidden;}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+audio{display:none}
+section{display:none;height:100vh;width:100vw;position:relative;overflow:hidden}
 
 /* INDEX */
 #section-index{
 display:flex;justify-content:center;align-items:center;
 background:linear-gradient(135deg,#e6e1ff,#ffe6d8);
-color:#ff3f7f;text-align:center;
-}
-#section-index h1{font-size:3rem;margin-bottom:10px;}
-#section-index p{font-size:1.2rem;margin:8px 0;}
-#section-index .btn{
-display:inline-block;margin-top:25px;padding:14px 30px;background:#ff3f7f;color:white;
-text-decoration:none;border-radius:30px;font-size:1.1rem;cursor:pointer;
-}
+color:#ff3f7f;text-align:center}
+#section-index h1{font-size:3rem}
+.btn{margin-top:25px;padding:14px 30px;background:#ff3f7f;color:#fff;border:none;border-radius:30px;cursor:pointer}
 
 /* LETTER */
 #section-letter{
-background:linear-gradient(rgba(243,238,246,0.75),rgba(228,220,237,0.75)),url("bg.jpg");
-background-size:cover;background-position:center;
 display:flex;justify-content:center;align-items:center;flex-direction:column;
-}
-.envelope{width:260px;height:170px;background:#fff;border-radius:6px;position:relative;}
-.flap{position:absolute;top:0;width:100%;height:100%;background:#f0bfd4;
-clip-path:polygon(0 0,50% 60%,100% 0);transform-origin:top;transition:1.2s;}
-.envelope.open .flap{transform:rotateX(180deg);}
-.letter{position:absolute;top:20px;left:50%;transform:translateX(-50%) scale(0.3);opacity:0;transition:1.6s;}
-.letter.show{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%) scale(1);opacity:1;}
-.paper{background:rgba(255,255,255,0.96);padding:28px;border-radius:16px;
-box-shadow:0 20px 60px rgba(0,0,0,0.25);width:80vw;max-width:520px;}
-.paper p{margin:12px 0;font-size:16px;color:#444;}
-.signature{text-align:right;margin-top:20px;color:#b04a7c;}
-#next-wrapper{display:none;text-align:center;margin-top:20px;}
+background:#f5f0ff}
+.envelope{width:260px;height:170px;background:#fff;position:relative}
+.flap{position:absolute;width:100%;height:100%;background:#f0bfd4;clip-path:polygon(0 0,50% 60%,100% 0);transform-origin:top;transition:1s}
+.envelope.open .flap{transform:rotateX(180deg)}
+.letter{opacity:0;transition:1s;margin-top:20px;text-align:center}
+.letter.show{opacity:1}
+#next-wrapper{display:none;margin-top:20px}
 
 /* VALENTINE */
 #section-valentine{
 display:flex;justify-content:center;align-items:center;flex-direction:column;
-background:linear-gradient(135deg,#ffe6e6,#ffd9f0);text-align:center;
-}
-.btn-val{padding:14px 30px;border-radius:30px;font-size:1.2rem;border:none;color:white;cursor:pointer;}
-.yes-btn{background:#28a745;}
-.no-btn{background:#dc3545;}
+background:linear-gradient(135deg,#ffe6e6,#ffd9f0)}
+.btn-val{padding:14px 30px;border-radius:30px;border:none;color:#fff;cursor:pointer}
+.yes-btn{background:#28a745}
+.no-btn{background:#dc3545;margin-left:10px}
 
 /* LOVE */
 #section-love{
-background:radial-gradient(ellipse at bottom,#0d1b2a 0%,#000 100%);
-color:white;display:flex;justify-content:center;align-items:center;flex-direction:column;
-}
-.side{position:absolute;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:40px;}
-.left-side{left:40px;} .right-side{right:40px;}
-.side img{width:130px;height:160px;object-fit:cover;border-radius:15px;
-box-shadow:0 0 20px rgba(255,255,255,0.5);opacity:0;transform:scale(0.6);transition:0.6s;}
-.side img.show{opacity:1;transform:scale(1);}
-.content{text-align:center;z-index:2;}
-.content h1{font-size:3rem;color:#00ff88;}
-.love-text{font-size:4rem;margin-top:40px;font-weight:bold;color:#ff4da6;}
+display:flex;justify-content:center;align-items:center;flex-direction:column;
+background:#000;color:#fff;text-align:center}
+.love-text{font-size:3rem;color:#ff4da6;margin-top:20px}
 .surprise-btn{
-margin-top:30px;padding:15px 35px;font-size:1.2rem;border:none;border-radius:30px;
-background:linear-gradient(45deg,#ff4da6,#ff0066);color:white;cursor:pointer;
-opacity:0;transform:scale(0);transition:0.6s;
-}
-.surprise-btn.show{opacity:1;transform:scale(1);}
+margin-top:25px;padding:12px 28px;border:none;border-radius:25px;
+background:#ff4da6;color:#fff;cursor:pointer;display:none}
 
 /* REPLY */
 #section-reply{
-background:linear-gradient(135deg,#1a1a1a,#000);
-color:white;display:flex;justify-content:center;align-items:center;flex-direction:column;
-}
-.next-btn{display:none;margin-top:20px;background:#00ff88;color:black;padding:10px 20px;border:none;border-radius:20px;cursor:pointer;}
+display:flex;justify-content:center;align-items:center;flex-direction:column;
+background:#111;color:#fff;text-align:center}
+.next-btn{display:none;margin-top:20px;padding:10px 20px}
 </style>
 </head>
 
@@ -87,121 +61,138 @@ color:white;display:flex;justify-content:center;align-items:center;flex-directio
 <!-- INDEX -->
 <section id="section-index">
 <div>
-<h1>Hi Sinch</h1>
-<p>Something special is waiting for you</p>
+<h1>Hi Sinch ❤️</h1>
 <button class="btn" id="to-letter">Read My Letter</button>
 </div>
 </section>
 
 <!-- LETTER -->
 <section id="section-letter">
-<div class="envelope">
-<div class="flap"></div>
-<div class="letter">
-<div class="paper">
-<p class="line"></p><p class="line"></p><p class="line"></p>
-<p class="signature"></p>
-</div>
+<div class="envelope"><div class="flap"></div></div>
+<div class="letter" id="letterText">
+<p id="typed"></p>
 <div id="next-wrapper">
 <button class="btn" id="to-valentine">Liked my letter?</button>
-</div>
 </div>
 </div>
 </section>
 
 <!-- VALENTINE -->
 <section id="section-valentine">
-<h1>Will you be my Valentine?</h1>
+<h1>Will you be my Valentine? ❤️</h1>
+<div>
 <button class="btn-val yes-btn" id="yes-btn">Yes</button>
 <button class="btn-val no-btn" id="no-btn">No</button>
+</div>
 </section>
 
 <!-- LOVE -->
 <section id="section-love">
-<div class="side left-side">
-<img src="pic1.jpg"><img src="pic2.jpg">
-</div>
-<div class="side right-side">
-<img src="pic3.jpg"><img src="pic4.jpg">
-</div>
+<h1>SHE SAID YES!!! 💚</h1>
 
-<div class="content">
-<h1>SHE SAID YES!!!</h1>
-<div class="love-text">I LOVE YOU</div>
-<button class="surprise-btn" id="surpriseBtn">Next</button>
-</div>
+<p>This is officially the best Valentine’s ever 🎉</p>
+<p>You’re stuck with me now 😌💍</p>
+
+<div class="love-text">I LOVE YOU ❤️</div>
+
+<button class="surprise-btn" id="surpriseBtn">
+You thought this was the end? hehe nahhh 😉
+</button>
 </section>
 
 <!-- REPLY -->
 <section id="section-reply">
-<h2>Tell me your free time on Feb 14</h2>
+<h2>What time are you free on Feb 14?</h2>
 <input type="number" id="start" placeholder="From">
-<input type="number" id="end" placeholder="To">
-<br>
+<input type="number" id="end" placeholder="To"><br>
 <button onclick="confirmTime()">Confirm</button>
 <div id="result"></div>
 <button class="next-btn" id="nextBtn">Be Ready</button>
 </section>
 
+<!-- LOOK -->
+<section id="section-look" style="display:flex;justify-content:center;align-items:center;background:#000;color:#fff">
+<h1>Look at me ❤️</h1>
+</section>
+
 <script>
 const music=document.getElementById("bgMusic");
 
-/* MOBILE AUDIO UNLOCK */
-function unlockMusic(){
-music.play().catch(()=>{});
-document.removeEventListener("click",unlockMusic);
-document.removeEventListener("touchstart",unlockMusic);
-}
-document.addEventListener("click",unlockMusic);
-document.addEventListener("touchstart",unlockMusic);
+/* MUSIC FIX — starts on first tap anywhere */
+document.addEventListener("click",()=>{
+if(music.paused){music.play().catch(()=>{});}
+},{once:true});
 
-/* SECTION SWITCH */
 function showSection(id){
 document.querySelectorAll("section").forEach(s=>s.style.display="none");
 document.getElementById(id).style.display="flex";
 }
 showSection("section-index");
 
-/* NAVIGATION */
+/* INDEX → LETTER */
 document.getElementById("to-letter").onclick=()=>{
 showSection("section-letter");
-setTimeout(()=>document.querySelector(".envelope").classList.add("open"),800);
+
 setTimeout(()=>{
-document.querySelector(".letter").classList.add("show");
-document.getElementById("next-wrapper").style.display="block";
-},2000);
+document.querySelector(".envelope").classList.add("open");
+},800);
+
+setTimeout(()=>{
+document.getElementById("letterText").classList.add("show");
+typeLetter();
+},1800);
 };
 
+/* LETTER TYPING FIX */
+const text=`Hi baby…  
+We’ve known each other for almost 8 years now.  
+I may be ordinary…  
+But my feelings for you are real.  
+So… will you stay with me this Valentine? ❤️`;
+
+function typeLetter(){
+let i=0;
+const el=document.getElementById("typed");
+function typing(){
+if(i<text.length){
+el.textContent+=text[i++];
+setTimeout(typing,35);
+}else{
+document.getElementById("next-wrapper").style.display="block";
+}
+}
+typing();
+}
+
+/* LETTER → VALENTINE */
 document.getElementById("to-valentine").onclick=()=>showSection("section-valentine");
 
-/* YES BUTTON FIX */
-document.getElementById("yes-btn").onclick=()=>{
-showSection("section-love");
+/* VALENTINE BUTTONS */
+document.getElementById("yes-btn").onclick=()=>showSection("section-love");
 
-/* show images */
-document.querySelectorAll("#section-love img").forEach((img,i)=>{
-setTimeout(()=>img.classList.add("show"),i*500);
-});
-
-/* show surprise button */
+/* LOVE PAGE — SHOW SURPRISE BUTTON AFTER 3s (fixed) */
 setTimeout(()=>{
-document.getElementById("surpriseBtn").classList.add("show");
-},2500);
-};
+document.getElementById("surpriseBtn").style.display="inline-block";
+},3000);
 
-/* SURPRISE BUTTON FIX */
+/* SURPRISE → REPLY */
 document.getElementById("surpriseBtn").onclick=()=>{
 showSection("section-reply");
 };
 
-/* TIME CONFIRM */
+/* CONFIRM TIME */
 function confirmTime(){
 const s=parseFloat(start.value);
 const e=parseFloat(end.value);
-if(isNaN(s)||isNaN(e)||s>=e){result.innerText="Enter valid time";return;}
-result.innerText=`Feb 14 ${s}-${e} PM is ours ❤️`;
+if(isNaN(s)||isNaN(e)||s>=e){
+result.textContent="Enter valid time";
+return;
+}
+result.textContent="Perfect ❤️";
 nextBtn.style.display="inline-block";
 }
+nextBtn.onclick=()=>showSection("section-look");
 </script>
+
 </body>
 </html>
