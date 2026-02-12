@@ -2,141 +2,188 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>For You 💖</title>
 <style>
-* { margin:0; padding:0; box-sizing:border-box; }
-body { font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+section{display:none;height:100vh;width:100vw;position:relative;overflow:hidden}
 
-audio#bgMusic { display:none; }
+#section-valentine{display:flex;justify-content:center;align-items:center;flex-direction:column;background:linear-gradient(135deg,#ffe6e6,#ffd9f0);text-align:center}
+.btn-val{padding:14px 30px;border-radius:30px;font-size:1.2rem;cursor:pointer;border:none;color:#fff}
+.yes-btn{background:#28a745}
+.no-btn{background:#dc3545}
 
-section { display:none; height:100vh; width:100vw; position:relative; overflow:hidden; }
+#section-love{background:#000;color:#fff;display:flex;justify-content:center;align-items:center;flex-direction:column;position:relative;overflow:hidden}
 
-#section-index {
-  display:flex; justify-content:center; align-items:center;
-  background: linear-gradient(135deg, #e6e1ff, #ffe6d8);
-  color:#ff3f7f; text-align:center;
-}
-#section-index h1 { font-size:3rem; margin-bottom:10px; }
-#section-index p { font-size:1.2rem; margin:8px 0; }
-#section-index .btn {
-  display:inline-block; margin-top:25px; padding:14px 30px; background:#ff3f7f; color:white;
-  text-decoration:none; border-radius:30px; font-size:1.1rem; transition:transform 0.3s ease; animation:pulse 2.5s infinite;
-}
-#section-index .btn:hover { transform:scale(1.12); }
-@keyframes pulse { 0% {box-shadow:0 0 0 0 rgba(255,63,127,0.5);} 70% {box-shadow:0 0 0 14px rgba(255,63,127,0);} 100%{box-shadow:0 0 0 0 rgba(255,63,127,0);} }
+.confetti,.heart{position:absolute;pointer-events:none}
+.confetti{width:8px;height:14px;background:yellow;animation:fall 4s linear infinite}
+.heart{color:#ff4da6;font-size:18px;animation:floatUp 6s linear infinite}
+@keyframes fall{from{transform:translateY(-10vh)}to{transform:translateY(110vh)}}
+@keyframes floatUp{from{transform:translateY(100vh);opacity:0}20%{opacity:1}to{transform:translateY(-10vh);opacity:0}}
 
-#section-letter {
-  background: linear-gradient(rgba(243,238,246,0.75), rgba(228,220,237,0.75)), url("bg.jpg");
-  background-size:cover; background-position:center; display:flex; justify-content:center; align-items:center;
-  font-family:"Georgia", serif; flex-direction:column;
-}
-.envelope-wrapper { position:relative; }
-.envelope { width:260px; height:170px; background:#fff; border-radius:6px; position:relative; box-shadow:0 15px 40px rgba(0,0,0,0.15); }
-.flap { position:absolute; top:0; width:100%; height:100%; background:#f0bfd4; clip-path:polygon(0 0,50% 60%,100% 0); transform-origin:top; transition:transform 1.2s ease; }
-.envelope.open .flap { transform:rotateX(180deg); }
-.letter { position:absolute; top:20px; left:50%; transform:translateX(-50%) scale(0.3); opacity:0; transition:all 1.6s ease; z-index:2; }
-.letter.show { position:fixed; top:50%; left:50%; transform:translate(-50%,-50%) scale(1); opacity:1; }
-.paper { background:rgba(255,255,255,0.96); padding:28px; border-radius:16px; backdrop-filter:blur(8px); box-shadow:0 20px 60px rgba(0,0,0,0.25); width:80vw; max-width:520px; max-height:75vh; overflow:hidden; }
-.paper p { margin:12px 0; font-size:16px; line-height:1.65; color:#444; }
-.signature { margin-top:22px; font-style:italic; color:#b04a7c; text-align:right; }
-#next-wrapper { display:none; text-align:center; margin-top:20px; }
+.side{position:absolute;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:20px}
+.left-side{left:10px}
+.right-side{right:10px}
+.side img{width:90px;height:110px;object-fit:cover;border-radius:12px;opacity:0;transform:scale(.6);transition:.6s}
+.side img.show{opacity:1;transform:scale(1)}
 
-#section-valentine {
-  display:flex; justify-content:center; align-items:center; flex-direction:column;
-  background:linear-gradient(135deg,#ffe6e6,#ffd9f0); text-align:center;
-}
-#section-valentine h1 { font-size:2.5rem; color:#ff3f7f; margin-bottom:40px; }
-.button-wrapper { display:flex; justify-content:center; gap:20px; flex-wrap:wrap; }
-.btn-val { padding:14px 30px; border-radius:30px; font-size:1.2rem; cursor:pointer; border:none; color:white; transition:transform 0.3s ease; }
-.yes-btn { background-color:#28a745; transform:scale(1); }
-.no-btn { background-color:#dc3545; margin-left:0; }
-
-#section-love {
-  background:radial-gradient(ellipse at bottom,#0d1b2a 0%,#000 100%); color:white;
-  display:flex; justify-content:center; align-items:center; overflow:hidden; position:relative; flex-direction:column;
-}
-
-/* confetti & hearts */
-.confetti, .heart { position:absolute; pointer-events:none; }
-.confetti { width:8px; height:14px; background:yellow; animation:fall 4s linear infinite; }
-.heart { color:#ff4da6; font-size:18px; animation:floatUp 6s linear infinite; }
-
-@keyframes fall { from{ transform:translateY(-10vh) rotate(0); } to{ transform:translateY(110vh) rotate(360deg); } }
-@keyframes floatUp { from{ transform:translateY(100vh) scale(0.8); opacity:0;} 20%{opacity:1;} to{ transform:translateY(-10vh) scale(1.2); opacity:0;} }
-
-.side { position:absolute; top:50%; transform:translateY(-50%); display:flex; flex-direction:column; gap:40px; z-index:1; }
-.left-side { left:40px; }
-.right-side { right:40px; }
-.side img { width:130px; height:160px; object-fit:cover; border-radius:15px; box-shadow:0 0 20px rgba(255,255,255,0.5); opacity:0; transform:scale(0.6); transition:all 0.6s ease; }
-.side img.show { opacity:1; transform:scale(1); }
-
-.content { text-align:center; z-index:2; max-width:600px; }
-.content h1 { font-size:3rem; color:#00ff88; }
-.love-text { font-size:4rem; margin-top:40px; font-weight:bold; color:#ff4da6; text-shadow:0 0 25px rgba(255,77,166,0.9); animation:pulse 1.5s infinite; }
-.surprise-btn { margin-top:30px; padding:15px 35px; font-size:1.2rem; border:none; border-radius:30px; background:linear-gradient(45deg,#ff4da6,#ff0066); color:white; cursor:pointer; opacity:0; transform:scale(0); transition:all 0.6s ease; }
-.surprise-btn.show { opacity:1; transform:scale(1); }
-
-#section-reply { background:linear-gradient(135deg,#1a1a1a,#000); color:white; display:flex; justify-content:center; align-items:center; flex-direction:column; }
-#section-reply .container { text-align:center; max-width:600px; }
-#section-reply input { width:80px; padding:10px; margin:10px; font-size:1.1rem; text-align:center; border-radius:8px; border:none; }
-#section-reply button { margin-top:20px; padding:12px 25px; font-size:1rem; border:none; border-radius:25px; background:#ff4da6; color:white; cursor:pointer; transition:0.3s; }
-#result { margin-top:25px; font-size:1.2rem; color:#00ff88; }
-.next-btn { display:none; margin-top:30px; background:#00ff88; color:black; }
-
-#section-look { background:radial-gradient(circle at center,#ff4da6,#000 70%); display:flex; justify-content:center; align-items:center; color:white; overflow:hidden; }
-#section-look h1 { font-size:5rem; animation:dramatic 2s ease-in-out infinite alternate; text-shadow:0 0 20px #ff4da6,0 0 40px #ff0066; }
-@keyframes dramatic { from{transform:scale(1);} to{transform:scale(1.1);} }
+.surprise-btn{margin-top:30px;padding:12px 25px;border:none;border-radius:25px;background:#ff4da6;color:#fff;cursor:pointer;opacity:0;transform:scale(0);transition:.5s}
+.surprise-btn.show{opacity:1;transform:scale(1)}
 </style>
 </head>
 
 <body>
-<audio id="bgMusic" src="music.mp3" autoplay loop></audio>
 
-<section id="section-index">...</section>
+<section id="section-valentine" style="display:flex">
+<h1>Will you be my Valentine? 💖</h1>
+<button class="btn-val yes-btn" id="yesBtn">Yes 💚</button>
+<button class="btn-val no-btn">No ❌</button>
+</section>
 
-<!-- (unchanged HTML kept same as user provided) -->
+<section id="section-love">
+<div class="side left-side">
+<img src="pic1.jpg"><img src="pic2.jpg">
+</div>
+<div class="side right-side">
+<img src="pic3.jpg"><img src="pic4.jpg">
+</div>
+<h1>SHE SAID YES 💚</h1>
+<button class="surprise-btn" id="surpriseBtn">You thought this was the end? 😏</button>
+</section>
 
 <script>
+// ===============================
+// SECTION SWITCHING
+// ===============================
 function showSection(id){
   document.querySelectorAll('section').forEach(s=>s.style.display='none');
-  const el=document.getElementById(id);
-  el.style.display='flex';
+  document.getElementById(id).style.display='flex';
 
-  if(id==="section-love"){
-    startCelebration();
+  // When LOVE page opens → start animations
+  if(id === 'section-love'){
+
+    // Fade images one by one (reset first)
+    const imgs = document.querySelectorAll("#section-love .side img");
+    imgs.forEach(img=>{
+      img.classList.remove('show');
+      img.style.opacity = 0;
+    });
+
+    imgs.forEach((img,i)=>{
+      setTimeout(()=>{
+        img.classList.add('show');
+      }, i * 900); // slower stagger for mobile
+    });
+
+    // Show surprise button after 15 seconds
+    const btn = document.getElementById('surpriseBtn');
+    btn.style.display = 'none';
+    setTimeout(()=>{
+      btn.style.display = 'inline-block';
+    },15000);
+
+    // Create floating hearts/confetti
+    startHearts();
+  }
+}
+showSection('section-index');
+
+// ===============================
+// NAV BUTTONS
+// ===============================
+document.getElementById('to-letter').onclick = ()=>{ showSection('section-letter'); startLetterAnimation(); };
+document.getElementById('to-valentine').onclick = ()=> showSection('section-valentine');
+document.getElementById('yes-btn').onclick = ()=> showSection('section-love');
+document.getElementById('surpriseBtn').onclick = ()=> showSection('section-reply');
+document.getElementById('nextBtn').onclick = ()=> showSection('section-look');
+
+// ===============================
+// REPLY CONFIRM
+// ===============================
+function confirmTime(){
+  const start=parseFloat(document.getElementById("start").value);
+  const end=parseFloat(document.getElementById("end").value);
+  const result=document.getElementById("result");
+
+  if(isNaN(start)||isNaN(end)||start<0||end>12.5||start>=end){
+    result.innerHTML="Enter a valid time between 0 and 12.30 😅";
+    document.getElementById('nextBtn').style.display="none";
+    return;
+  }
+
+  result.innerHTML=`Perfect 😌 Feb 14th at ${start}–${end} PM is now officially ours 💖✨`;
+  document.getElementById('nextBtn').style.display="inline-block";
+}
+
+// ===============================
+// LETTER ANIMATION
+// ===============================
+function startLetterAnimation(){
+  const envelope=document.querySelector("#section-letter .envelope");
+  const letter=document.querySelector("#section-letter .letter");
+  const lines=document.querySelectorAll("#section-letter .line");
+  const signature=document.querySelector("#section-letter .signature");
+
+  const text=[
+"Hi baby… 💌",
+"We’ve known each other for almost 8 years now, and we’ve liked each other for the past 4 years… ❤️",
+"I know I’m not the person you once wished for. I’m just someone ordinary… maybe even boring.",
+"But still… I feel something real for you.",
+"And somehow, I feel this Valentine might be the last one I ever get to celebrate with you… 💔",
+"Maybe we aren’t meant to stay forever. But I truly wish… at least for this Valentine, we can still be together. 💖"
+];
+
+  let lineIndex=0,charIndex=0;
+  lines.forEach(l=>l.textContent='');
+  signature.textContent='';
+
+  setTimeout(()=>{envelope.classList.add('open');},1200);
+  setTimeout(()=>{letter.classList.add('show'); typeText();},3000);
+
+  function typeText(){
+    if(lineIndex<text.length){
+      if(charIndex<text[lineIndex].length){
+        lines[lineIndex].textContent+=text[lineIndex][charIndex];
+        charIndex++;
+        setTimeout(typeText,60);
+      }else{
+        lineIndex++; charIndex=0;
+        setTimeout(typeText,700);
+      }
+    }else{
+      signature.textContent="— Yours, always 💖";
+      document.getElementById("next-wrapper").style.display='block';
+    }
   }
 }
 
-function startCelebration(){
-  // confetti
-  for(let i=0;i<25;i++){
-    const c=document.createElement('div');
-    c.className='confetti';
-    c.style.left=Math.random()*100+'vw';
-    c.style.animationDelay=Math.random()*4+'s';
-    document.getElementById('section-love').appendChild(c);
-  }
+// ===============================
+// FLOATING HEARTS / CONFETTI
+// ===============================
+function startHearts(){
+  const section = document.getElementById('section-love');
 
-  // hearts
-  for(let i=0;i<20;i++){
-    const h=document.createElement('div');
-    h.className='heart';
-    h.textContent='❤';
-    h.style.left=Math.random()*100+'vw';
-    h.style.animationDelay=Math.random()*6+'s';
-    document.getElementById('section-love').appendChild(h);
-  }
+  const interval = setInterval(()=>{
+    if(section.style.display === 'none'){
+      clearInterval(interval);
+      return;
+    }
 
-  // fade images one by one
-  document.querySelectorAll('#section-love .side img').forEach((img,i)=>{
-    setTimeout(()=>img.classList.add('show'), i*800);
-  });
+    const heart = document.createElement('div');
+    heart.className = 'heart';
+    heart.textContent = Math.random() > 0.5 ? '❤️' : '💖';
 
-  // show surprise button after 15s
-  setTimeout(()=>{
-    document.getElementById('surpriseBtn').classList.add('show');
-  },15000);
+    heart.style.left = Math.random()*100 + 'vw';
+    heart.style.animationDuration = (4 + Math.random()*3) + 's';
+
+    section.appendChild(heart);
+
+    setTimeout(()=>heart.remove(),7000);
+
+  },300);
 }
 </script>
+
 </body>
 </html>
