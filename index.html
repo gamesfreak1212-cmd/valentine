@@ -2,124 +2,76 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>For You 💖</title>
 <style>
-/* ===============================
-   GLOBAL RESET
-   =============================== */
 * { margin:0; padding:0; box-sizing:border-box; }
 body { font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
 
-/* ===============================
-   COMMON MUSIC PLAYER
-   =============================== */
 audio#bgMusic { display:none; }
 
-/* ===============================
-   SECTIONS
-   =============================== */
-section { display:none; height:100vh; width:100vw; position:relative; overflow:hidden; }
+section { display:none; min-height:100vh; width:100vw; position:relative; overflow:hidden; padding:20px; }
 
-/* ===============================
-   INDEX / HOME PAGE
-   =============================== */
+/* INDEX */
 #section-index {
   display:flex; justify-content:center; align-items:center;
   background: linear-gradient(135deg, #e6e1ff, #ffe6d8);
   color:#ff3f7f; text-align:center;
 }
-#section-index h1 { font-size:3rem; margin-bottom:10px; }
-#section-index p { font-size:1.2rem; margin:8px 0; }
+#section-index h1 { font-size:clamp(2rem,6vw,3rem); margin-bottom:10px; }
+#section-index p { font-size:clamp(1rem,3.5vw,1.2rem); margin:8px 0; }
 #section-index .btn {
   display:inline-block; margin-top:25px; padding:14px 30px; background:#ff3f7f; color:white;
-  text-decoration:none; border-radius:30px; font-size:1.1rem; transition:transform 0.3s ease; animation:pulse 2.5s infinite;
+  border:none; border-radius:30px; font-size:1.1rem; cursor:pointer;
 }
-#section-index .btn:hover { transform:scale(1.12); }
-@keyframes pulse { 0% {box-shadow:0 0 0 0 rgba(255,63,127,0.5);} 70% {box-shadow:0 0 0 14px rgba(255,63,127,0);} 100%{box-shadow:0 0 0 0 rgba(255,63,127,0);} }
 
-/* ===============================
-   LETTER PAGE
-   =============================== */
+/* LETTER */
 #section-letter {
-  background: linear-gradient(rgba(243,238,246,0.75), rgba(228,220,237,0.75)), url("bg.jpg");
-  background-size:cover; background-position:center; display:flex; justify-content:center; align-items:center;
-  font-family:"Georgia", serif; flex-direction:column;
+  background: linear-gradient(rgba(243,238,246,0.85), rgba(228,220,237,0.85)), url("bg.jpg");
+  background-size:cover; background-position:center;
+  display:flex; justify-content:center; align-items:center; flex-direction:column;
+  font-family:"Georgia", serif;
 }
-.envelope-wrapper { position:relative; }
-.envelope { width:260px; height:170px; background:#fff; border-radius:6px; position:relative; box-shadow:0 15px 40px rgba(0,0,0,0.15); }
+.envelope { width:220px; height:150px; background:#fff; border-radius:6px; position:relative; }
 .flap { position:absolute; top:0; width:100%; height:100%; background:#f0bfd4; clip-path:polygon(0 0,50% 60%,100% 0); transform-origin:top; transition:transform 1.2s ease; }
 .envelope.open .flap { transform:rotateX(180deg); }
-.letter { position:absolute; top:20px; left:50%; transform:translateX(-50%) scale(0.3); opacity:0; transition:all 1.6s ease; z-index:2; }
+.letter { position:absolute; top:20px; left:50%; transform:translateX(-50%) scale(0.3); opacity:0; transition:all 1.6s ease; }
 .letter.show { position:fixed; top:50%; left:50%; transform:translate(-50%,-50%) scale(1); opacity:1; }
-.paper { background:rgba(255,255,255,0.96); padding:28px; border-radius:16px; backdrop-filter:blur(8px); box-shadow:0 20px 60px rgba(0,0,0,0.25); width:80vw; max-width:520px; max-height:75vh; overflow:hidden; }
-.paper p { margin:12px 0; font-size:16px; line-height:1.65; color:#444; }
-.signature { margin-top:22px; font-style:italic; color:#b04a7c; text-align:right; }
-#next-wrapper { display:none; text-align:center; margin-top:20px; }
+.paper { background:rgba(255,255,255,0.96); padding:20px; border-radius:16px; width:90vw; max-width:500px; }
+.paper p { margin:10px 0; font-size:15px; line-height:1.6; color:#444; }
+.signature { margin-top:15px; font-style:italic; color:#b04a7c; text-align:right; }
+#next-wrapper { display:none; text-align:center; margin-top:15px; }
 
-/* ===============================
-   VALENTINE PAGE
-   =============================== */
+/* VALENTINE */
 #section-valentine {
   display:flex; justify-content:center; align-items:center; flex-direction:column;
   background:linear-gradient(135deg,#ffe6e6,#ffd9f0); text-align:center;
 }
-#section-valentine h1 { font-size:2.5rem; color:#ff3f7f; margin-bottom:40px; }
-.button-wrapper { display:flex; justify-content:center; gap:20px; flex-wrap:wrap; }
-.btn-val { padding:14px 30px; border-radius:30px; font-size:1.2rem; cursor:pointer; border:none; color:white; transition:transform 0.3s ease; }
-.yes-btn { background-color:#28a745; transform:scale(1); }
-.no-btn { background-color:#dc3545; margin-left:0; }
+#section-valentine h1 { font-size:clamp(1.6rem,5vw,2.5rem); color:#ff3f7f; margin-bottom:30px; }
+.button-wrapper { display:flex; justify-content:center; gap:15px; flex-wrap:wrap; }
+.btn-val { padding:12px 26px; border-radius:30px; font-size:1.1rem; cursor:pointer; border:none; color:white; }
+.yes-btn { background-color:#28a745; }
+.no-btn { background-color:#dc3545; }
 
-/* ===============================
-   LOVE PAGE
-   =============================== */
+/* LOVE */
 #section-love {
   background:radial-gradient(ellipse at bottom,#0d1b2a 0%,#000 100%); color:white;
-  display:flex; justify-content:center; align-items:center; overflow:hidden; position:relative; flex-direction:column;
+  display:flex; justify-content:center; align-items:center; flex-direction:column; text-align:center;
 }
-.side { position:absolute; top:50%; transform:translateY(-50%); display:flex; flex-direction:column; gap:40px; z-index:1; }
-.left-side { left:40px; }
-.right-side { right:40px; }
-.side img { width:130px; height:160px; object-fit:cover; border-radius:15px; box-shadow:0 0 20px rgba(255,255,255,0.5); opacity:0; transform:scale(0.6); transition:all 0.6s ease; }
-.side img.show { opacity:1; transform:scale(1); }
-.confetti { position:absolute; width:8px; height:14px; }
-.heart { position:absolute; font-size:20px; animation:floatUp linear forwards; opacity:0.8; }
-@keyframes floatUp { 0% { transform:translateY(100vh) scale(0.8); opacity:0;} 20% {opacity:1;} 100%{ transform:translateY(-10vh) scale(1.2); opacity:0;} }
-.content { text-align:center; z-index:2; max-width:600px; }
-.content h1 { font-size:3rem; color:#00ff88; }
-.love-text { font-size:4rem; margin-top:40px; font-weight:bold; color:#ff4da6; text-shadow:0 0 25px rgba(255,77,166,0.9); animation:pulse 1.5s infinite; }
-.surprise-btn { margin-top:30px; padding:15px 35px; font-size:1.2rem; border:none; border-radius:30px; background:linear-gradient(45deg,#ff4da6,#ff0066); color:white; cursor:pointer; box-shadow:0 0 20px rgba(255,77,166,0.8); opacity:0; transform:scale(0); transition:all 0.6s ease; }
-.surprise-btn.show { opacity:1; transform:scale(1); }
+.content h1 { font-size:clamp(2rem,6vw,3rem); color:#00ff88; }
+.love-text { font-size:clamp(2.5rem,8vw,4rem); margin-top:25px; font-weight:bold; color:#ff4da6; }
+.surprise-btn { margin-top:25px; padding:14px 30px; font-size:1.1rem; border:none; border-radius:30px; background:#ff4da6; color:white; cursor:pointer; display:none; }
 
-/* ===============================
-   REPLY PAGE
-   =============================== */
-#section-reply { background:linear-gradient(135deg,#1a1a1a,#000); color:white; display:flex; justify-content:center; align-items:center; flex-direction:column; }
-#section-reply .container { text-align:center; max-width:600px; }
-#section-reply input { width:80px; padding:10px; margin:10px; font-size:1.1rem; text-align:center; border-radius:8px; border:none; }
-#section-reply button { margin-top:20px; padding:12px 25px; font-size:1rem; border:none; border-radius:25px; background:#ff4da6; color:white; cursor:pointer; transition:0.3s; }
-#section-reply button:hover { transform:scale(1.1); }
-#result { margin-top:25px; font-size:1.2rem; color:#00ff88; }
-.next-btn { display:none; margin-top:30px; background:#00ff88; color:black; }
+/* REPLY */
+#section-reply { background:linear-gradient(135deg,#1a1a1a,#000); color:white; display:flex; justify-content:center; align-items:center; flex-direction:column; text-align:center; }
+#section-reply input { width:90px; padding:10px; margin:8px; font-size:1rem; text-align:center; border-radius:8px; border:none; }
+#section-reply button { margin-top:15px; padding:12px 22px; font-size:1rem; border:none; border-radius:25px; background:#ff4da6; color:white; cursor:pointer; }
+#result { margin-top:15px; font-size:1.1rem; color:#00ff88; }
+.next-btn { display:none; margin-top:20px; background:#00ff88; color:black; }
 
-/* ===============================
-   LOOK PAGE
-   =============================== */
-#section-look { background:radial-gradient(circle at center,#ff4da6,#000 70%); display:flex; justify-content:center; align-items:center; color:white; overflow:hidden; }
-#section-look h1 { font-size:5rem; animation:dramatic 2s ease-in-out infinite alternate; text-shadow:0 0 20px #ff4da6,0 0 40px #ff0066; }
-@keyframes dramatic { from{transform:scale(1);} to{transform:scale(1.1);} }
-
-/* ===============================
-   MEDIA QUERIES
-   =============================== */
-@media(max-width:600px){
-#section-index h1 { font-size:2rem; }
-#section-index p { font-size:1rem; }
-#section-index .btn { padding:12px 24px; font-size:1rem; }
-.envelope { width:200px; height:130px; }
-.letter.show { width:90vw; max-width:400px; max-height:70vh; }
-.paper { padding:20px; font-size:14px; }
-#section-valentine h1 { font-size:1.8rem; }
-}
+/* LOOK */
+#section-look { background:radial-gradient(circle at center,#ff4da6,#000 70%); display:flex; justify-content:center; align-items:center; color:white; }
+#section-look h1 { font-size:clamp(2.5rem,10vw,5rem); }
 </style>
 </head>
 
@@ -127,7 +79,7 @@ section { display:none; height:100vh; width:100vw; position:relative; overflow:h
 <audio id="bgMusic" src="music.mp3" autoplay loop></audio>
 
 <section id="section-index">
-  <div class="container">
+  <div>
     <h1>Hi Sinch 💖</h1>
     <p>I know you’re surprised 😳</p>
     <p>Something special is waiting for you 💌</p>
@@ -136,22 +88,20 @@ section { display:none; height:100vh; width:100vw; position:relative; overflow:h
 </section>
 
 <section id="section-letter">
-  <div class="envelope-wrapper">
-    <div class="envelope">
-      <div class="flap"></div>
-      <div class="letter">
-        <div class="paper">
-          <p class="line"></p>
-          <p class="line"></p>
-          <p class="line"></p>
-          <p class="line"></p>
-          <p class="line"></p>
-          <p class="line"></p>
-          <p class="signature"></p>
-        </div>
-        <div id="next-wrapper">
-          <button class="btn" id="to-valentine">Liked my letter? 💌</button>
-        </div>
+  <div class="envelope">
+    <div class="flap"></div>
+    <div class="letter">
+      <div class="paper">
+        <p class="line"></p>
+        <p class="line"></p>
+        <p class="line"></p>
+        <p class="line"></p>
+        <p class="line"></p>
+        <p class="line"></p>
+        <p class="signature"></p>
+      </div>
+      <div id="next-wrapper">
+        <button class="btn" id="to-valentine">Liked my letter? 💌</button>
       </div>
     </div>
   </div>
@@ -166,32 +116,18 @@ section { display:none; height:100vh; width:100vw; position:relative; overflow:h
 </section>
 
 <section id="section-love">
-  <div class="side left-side">
-    <img src="pic1.jpg">
-    <img src="pic2.jpg">
-  </div>
-  <div class="side right-side">
-    <img src="pic3.jpg">
-    <img src="pic4.jpg">
-  </div>
   <div class="content">
-    <h1>SHE SAID YES!!! 💚💚💚</h1>
-    <p>This is officially the best Valentine’s ever 🎉</p>
-    <p>You’re stuck with me now 😌💍</p>
+    <h1>SHE SAID YES!!! 💚</h1>
     <div class="love-text">I LOVE YOU ❤️</div>
-    <button class="surprise-btn" id="surpriseBtn">You thought this was the end? hehe nahhh 😏</button>
+    <button class="surprise-btn" id="surpriseBtn">You thought that's it? 😏</button>
   </div>
 </section>
 
 <section id="section-reply">
-  <div class="container">
-    <h2>Since you are my Valentine now 😌💖</h2>
-    <p>Of course I wanna spend some time with you...</p>
-    <p>So tell me, what time are you free on Feb 14? 👀</p>
-    <p>(Between 0 and 12.30 only)</p>
+  <div>
+    <h2>What time are you free on Feb 14? 👀</h2>
     <input type="number" id="start" placeholder="From" step="0.5" min="0" max="12.5">
-    <input type="number" id="end" placeholder="To" step="0.5" min="0" max="12.5">
-    <br>
+    <input type="number" id="end" placeholder="To" step="0.5" min="0" max="12.5"><br>
     <button onclick="confirmTime()">Confirm 😏</button>
     <div id="result"></div>
     <button class="next-btn" id="nextBtn">Be Ready 😈</button>
@@ -203,22 +139,78 @@ section { display:none; height:100vh; width:100vw; position:relative; overflow:h
 </section>
 
 <script>
-// ===============================
-// SECTION SWITCHING
-// ===============================
-function showSection(id){document.querySelectorAll('section').forEach(s=>s.style.display='none');document.getElementById(id).style.display='flex';}
+function showSection(id){
+  document.querySelectorAll('section').forEach(s=>s.style.display='none');
+  document.getElementById(id).style.display='flex';
+
+  if(id === 'section-love'){
+    setTimeout(()=>{
+      document.getElementById('surpriseBtn').style.display='inline-block';
+    }, 1500);
+  }
+}
 showSection('section-index');
 
-// ===============================
-// INDEX → LETTER
-// ===============================
-document.getElementById('to-letter').addEventListener('click',()=>{showSection('section-letter');startLetterAnimation();});
+document.getElementById('to-letter').onclick=()=>{showSection('section-letter'); startLetterAnimation();};
 
-// ===============================
-// LETTER ANIMATION
-// ===============================
+document.getElementById('to-valentine').onclick=()=>showSection('section-valentine');
+
+document.getElementById('yes-btn').onclick=()=>showSection('section-love');
+
+function confirmTime(){
+  const start=parseFloat(document.getElementById('start').value);
+  const end=parseFloat(document.getElementById('end').value);
+  const result=document.getElementById('result');
+  const nextBtn=document.getElementById('nextBtn');
+
+  if(isNaN(start)||isNaN(end)||start<0||end>12.5||start>=end){
+    result.innerHTML="Enter valid time 😅";
+    nextBtn.style.display="none";
+    return;
+  }
+
+  result.innerHTML=`Perfect 😌 ${start}–${end} PM is ours 💖`;
+  nextBtn.style.display="inline-block";
+}
+
+nextBtn.onclick=()=>showSection('section-look');
+
+document.getElementById('surpriseBtn').onclick=()=>showSection('section-reply');
+
 function startLetterAnimation(){
-  const envelope=document.querySelector("#section-letter .envelope");
+  const envelope=document.querySelector('.envelope');
+  const letter=document.querySelector('.letter');
+  const lines=document.querySelectorAll('.line');
+  const signature=document.querySelector('.signature');
+
+  const text=[
+    "Hi baby… 💌",
+    "We’ve known each other for almost 8 years… ❤️",
+    "But I truly wish this Valentine we stay together 💖"
+  ];
+
+  let lineIndex=0,charIndex=0;
+  lines.forEach(l=>l.textContent='');
+
+  setTimeout(()=>envelope.classList.add('open'),800);
+  setTimeout(()=>{letter.classList.add('show'); typeText();},1600);
+
+  function typeText(){
+    if(lineIndex<text.length){
+      if(charIndex<text[lineIndex].length){
+        lines[lineIndex].textContent+=text[lineIndex][charIndex++];
+        setTimeout(typeText,40);
+      } else { lineIndex++; charIndex=0; setTimeout(typeText,400); }
+    } else {
+      signature.textContent="— Yours always 💖";
+      document.getElementById('next-wrapper').style.display='block';
+    }
+  }
+}
+</script>
+</body>
+</html>
+"#section-letter .envelope");
   const letter=document.querySelector("#section-letter .letter");
   const lines=document.querySelectorAll("#section-letter .line");
   const signature=document.querySelector("#section-letter .signature");
